@@ -1,3 +1,8 @@
+## Libyui Submodules Repository
+
+This repository contains the libyui submodules to ease checking out
+and updating all libyui Git repositories.
+
 ### Commands
 
 Initial clone:
@@ -7,6 +12,12 @@ Initial clone:
 Update all modules:
 
 `git submodule update --remote`
+
+Faster parallel update:
+
+- Use the `fast-update` script (uses plain `xargs`, should work everywhere)
+- Or the `parallel-update` script (requires `gnu_parallel` package,
+  does not mix the subprocess outputs)
 
 Adding new modules:
 
