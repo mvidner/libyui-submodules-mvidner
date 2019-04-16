@@ -4,10 +4,8 @@
 command -v parallel >/dev/null || { echo "GNU parallel is not installed, install it with\
 'sudo zypper install gnu_parallel'"; exit 1; }
 
-TARGET_BRANCH="master"
-CMD="cd {} && echo 'Updating directory: {}' && git stash save && git reset --hard && \
-git fetch --prune && git checkout -q $TARGET_BRANCH &&  \
-git pull --rebase"
+source "${BASH_SOURCE%/*}/update-funcs.sh"
 
-find . -maxdepth 1 ! -name .git -type d -print0 | parallel -0 -j150% -n1 $CMD
+find . -maxdepth 1 ! -name .git -type d -print0 | \
+  parallel -0 -j150% -n1 "cd {} && echo -e '\nUpdating directory: {}' && $UPDATE_CMD"
 
