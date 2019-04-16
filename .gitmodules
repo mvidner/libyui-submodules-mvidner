@@ -1,0 +1,40 @@
+[submodule "libyui"]
+	path = libyui
+	url = git@github.com:libyui/libyui.git
+	branch = master
+[submodule "libyui-ncurses"]
+	path = libyui-ncurses
+	url = git@github.com:libyui/libyui-ncurses.git
+	branch = master
+[submodule "libyui-ncurses-pkg"]
+	path = libyui-ncurses-pkg
+	url = git@github.com:libyui/libyui-ncurses-pkg.git
+	branch = master
+[submodule "libyui-qt-pkg"]
+	path = libyui-qt-pkg
+	url = git@github.com:libyui/libyui-qt-pkg.git
+	branch = master
+[submodule "libyui-gtk-pkg"]
+	path = libyui-gtk-pkg
+	url = git@github.com:libyui/libyui-gtk-pkg.git
+	branch = master
+[submodule "libyui-gtk"]
+	path = libyui-gtk
+	url = git@github.com:libyui/libyui-gtk.git
+	branch = master
+[submodule "libyui-qt"]
+	path = libyui-qt
+	url = git@github.com:libyui/libyui-qt.git
+	branch = master
+[submodule "libyui-rake"]
+	path = libyui-rake
+	url = git@github.com:libyui/libyui-rake.git
+	branch = master
+[submodule "libyui-qt-graph"]
+	path = libyui-qt-graph
+	url = git@github.com:libyui/libyui-qt-graph.git
+	branch = master
+[submodule "docker-devel"]
+	path = docker-devel
+	url = git@github.com:libyui/docker-devel.git
+	branch = master
