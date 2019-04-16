@@ -10,7 +10,7 @@ Update all modules:
 
 Adding new modules:
 
-`git submodule add <url>`
+`git submodule add -b master <url>`
 
 Removing a module:
 
