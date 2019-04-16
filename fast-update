@@ -3,4 +3,4 @@
 source "${BASH_SOURCE%/*}/update-funcs.sh"
 
 find . -maxdepth 1 -type d -print0 | \
-  xargs -0 -I% -P$(nproc) -n1 bash -c "cd '%' && echo -e '\nUpdating directory: %' $UPDATE_CMD"
+  xargs -0 -I% -P$(expr $(nproc) "*" 3 / 2) -n1 bash -c "cd '%' && echo -e '\nUpdating directory: %' && $UPDATE_CMD"
