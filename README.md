@@ -9,11 +9,10 @@ Initial clone:
 
 `git clone --recurse-submodules git@github.com:lslezak/libyui-submodules.git`
 
-Update all modules:
+This clones the repositories in the detached HEAD state, please run one of the
+update scripts below to track the branch.
 
-`git submodule update --remote`
-
-Faster parallel update:
+Fast parallel update:
 
 - Use the `fast-update` script (uses plain `xargs`, should work everywhere)
 - Or the `parallel-update` script (requires `gnu_parallel` package,
