@@ -4,7 +4,8 @@
 command -v parallel >/dev/null || { echo "GNU parallel is not installed, install it with\
 'sudo zypper install gnu_parallel'"; exit 1; }
 
-source "${BASH_SOURCE%/*}/update-funcs.sh"
+# shellcheck source=update-funcs.sh
+. "${BASH_SOURCE%/*}/update-funcs.sh"
 
 find . -maxdepth 1 ! -name .git -type d -print0 | \
   parallel -0 -j150% -n1 "cd {} && echo -e '\nUpdating directory: {}' && $UPDATE_CMD"
