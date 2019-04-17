@@ -38,3 +38,7 @@
 	path = docker-devel
 	url = git@github.com:libyui/docker-devel.git
 	branch = master
+[submodule "libyui-rest-api"]
+	path = libyui-rest-api
+	url = git@github.com:libyui/libyui-rest-api.git
+	branch = master
