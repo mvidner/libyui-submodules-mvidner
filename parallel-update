@@ -1,12 +1,30 @@
 #! /usr/bin/sh
 
+# read the target branch from the .gitmodules config file
+TARGET_BRANCH=$(sed -n "0,/^[[:space:]]*branch[[:space:]]*=/s/^[[:space:]]*branch[[:space:]]*=[[:space:]]*\(.*\)/\1/p" .gitmodules)
+echo "Target branch: $TARGET_BRANCH"
+
+# command for updating the git checkout:
+# - stash the current changes to not loose them
+# - reset the checkout to a clean state
+# - fetch from remote
+# - ensure the target branch is checked out
+# - pull the upstream changes
+UPDATE_CMD="git stash save && git reset --hard && \
+git fetch --prune && git checkout -q $TARGET_BRANCH &&  \
+git pull --rebase"
+
+FIND_CMD="find . -maxdepth 1 ! -name .git ! -name . -type d -print0"
+
 # check if GNU parallel is installed
-command -v parallel >/dev/null || { echo "GNU parallel is not installed, install it with\
-'sudo zypper install gnu_parallel'"; exit 1; }
+if command -v parallel >/dev/null; then
+   $FIND_CMD | \
+    parallel -0 -j150% -n1 "cd {} && echo -e '\nUpdating directory: {}' && $UPDATE_CMD"
+else
+  echo "* INFO: install GNU parallel to avoid mixing STDOUT,"
+  echo "* install it with 'sudo zypper install gnu_parallel'"
+  echo
 
-# shellcheck source=update-funcs.sh
-. "${BASH_SOURCE%/*}/update-funcs.sh"
-
-find . -maxdepth 1 ! -name .git -type d -print0 | \
-  parallel -0 -j150% -n1 "cd {} && echo -e '\nUpdating directory: {}' && $UPDATE_CMD"
-
+  $FIND_CMD | \
+    xargs -0 -I% -P$(($(nproc) * 3 / 2)) -n1 bash -c "cd '%' && echo -e '\nUpdating directory: %' && $UPDATE_CMD"
+fi
