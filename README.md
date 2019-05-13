@@ -12,19 +12,16 @@ Initial clone:
 This clones the repositories in the detached HEAD state, please run
 `git submodule foreach "git checkout master"` to checkout the `master` branch.
 
-Or run one of the update scripts below to update the submodules to the latest
-state.
+Updating the repositories:
 
-Fast parallel update:
-
-- Use the `fast-update` script (uses plain `xargs`, should work everywhere)
-- Or the `parallel-update` script (requires `gnu_parallel` package,
-  does not mix the subprocess outputs)
+- `git submodule foreach "git pull --rebase"`
+- or run the `./parallel-update` script which updates the modules in parallel
+  which is much faster
 
 Adding new modules:
 
-`git submodule add -b master <url>`
+- `git submodule add -b master <url>`
 
 Removing a module:
 
-`git rm <module>`
+- `git rm <module>`
