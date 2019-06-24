@@ -42,3 +42,11 @@
 	path = libyui-rest-api
 	url = git@github.com:libyui/libyui-rest-api.git
 	branch = master
+[submodule "libyui-ncurses-rest-api"]
+	path = libyui-ncurses-rest-api
+	url = git@github.com:libyui/libyui-ncurses-rest-api.git
+	branch = master
+[submodule "libyui-qt-rest-api"]
+	path = libyui-qt-rest-api
+	url = git@github.com:libyui/libyui-qt-rest-api.git
+	branch = master
