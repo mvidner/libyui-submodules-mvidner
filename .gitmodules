@@ -50,3 +50,7 @@
 	path = libyui-qt-rest-api
 	url = git@github.com:libyui/libyui-qt-rest-api.git
 	branch = master
+[submodule "ci-libyui-container"]
+	path = ci-libyui-container
+	url = git@github.com:libyui/ci-libyui-container.git
+	branch = master
