@@ -54,3 +54,7 @@
 	path = ci-libyui-container
 	url = git@github.com:libyui/ci-libyui-container.git
 	branch = master
+[submodule "libyui-bindings"]
+	path = libyui-bindings
+	url = git@github.com:libyui/libyui-bindings.git
+	branch = master
