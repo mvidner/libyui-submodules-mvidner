@@ -28,3 +28,6 @@
 [submodule "libyui-bindings"]
 	path = libyui-bindings
 	url = https://github.com/libyui/libyui-bindings.git
+[submodule "yast-ycp-ui-bindings"]
+	path = yast-ycp-ui-bindings
+	url = https://github.com/yast/yast-ycp-ui-bindings.git
