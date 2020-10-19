@@ -1,3 +1,30 @@
 [submodule "libyui"]
 	path = libyui
 	url = https://github.com/libyui/libyui.git
+[submodule "libyui-ncurses"]
+	path = libyui-ncurses
+	url = https://github.com/libyui/libyui-ncurses.git
+[submodule "libyui-qt"]
+	path = libyui-qt
+	url = https://github.com/libyui/libyui-qt.git
+[submodule "libyui-qt-pkg"]
+	path = libyui-qt-pkg
+	url = https://github.com/libyui/libyui-qt-pkg.git
+[submodule "libyui-qt-graph"]
+	path = libyui-qt-graph
+	url = https://github.com/libyui/libyui-qt-graph.git
+[submodule "libyui-ncurses-pkg"]
+	path = libyui-ncurses-pkg
+	url = https://github.com/libyui/libyui-ncurses-pkg.git
+[submodule "libyui-rest-api"]
+	path = libyui-rest-api
+	url = https://github.com/libyui/libyui-rest-api.git
+[submodule "libyui-ncurses-rest-api"]
+	path = libyui-ncurses-rest-api
+	url = https://github.com/libyui/libyui-ncurses-rest-api.git
+[submodule "libyui-qt-rest-api"]
+	path = libyui-qt-rest-api
+	url = https://github.com/libyui/libyui-qt-rest-api.git
+[submodule "libyui-bindings"]
+	path = libyui-bindings
+	url = https://github.com/libyui/libyui-bindings.git
