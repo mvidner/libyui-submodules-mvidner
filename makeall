@@ -8,16 +8,39 @@
 set -eu
 set -x
 
+buildrequires() {
+  zypper --non-interactive in --no-recommends osc build \
+     make cmake boost-devel gcc-c++ pkg-config doxygen sudo \
+     libqt5-qtbase-devel libqt5-qtsvg-devel libqt5-qtx11extras-devel \
+     fontconfig-devel      ncurses-devel      graphviz-devel \
+     libzypp-devel \
+     swig ruby-devel python-devel \
+     yast2-devtools yast2-core-devel \
+     libmicrohttpd-devel jsoncpp-devel \
+     libtool docbook-xsl-stylesheets \
+     xauth xorg-x11-fonts
+}
+
 makerepo() {
     # git checkout master
 
-    test -f CMakeLists.txt || ./bootstrap.sh
-    if $CLEAN; then
-        rm -rf build
+    if test -f ./bootstrap.sh; then
+        ./bootstrap.sh
     fi
-    mkdir -p build; cd build
-    cmake -DCMAKE_BUILD_TYPE=RELWITHDEBINFO ..
-    make -j`nproc`
+
+    if test -f CMakeLists.txt; then
+        test -f CMakeLists.txt || ./bootstrap.sh
+
+        if $CLEAN; then
+            rm -rf build
+        fi
+        mkdir -p build; cd build
+        cmake -DCMAKE_BUILD_TYPE=RELWITHDEBINFO ..
+    else
+        make -f Makefile.cvs
+    fi
+
+    make -j$(nproc)
     if $INSTALL; then
         $SUDO make install
     fi
@@ -25,12 +48,14 @@ makerepo() {
 
 LIBYUI_REPOS='
 libyui
+yast-ycp-ui-bindings
 libyui-rest-api
 libyui-ncurses          libyui-qt
                         libyui-qt-graph
 libyui-ncurses-pkg      libyui-qt-pkg
 libyui-ncurses-rest-api libyui-qt-rest-api
 '
+
 
 # libyui-bindings ruby-ui
 # LIBYUI_REPOS="$LIBYUI_REPOS libyui-gtk libyui-gtk-pkg"
@@ -41,7 +66,7 @@ libyui-mga-gtk libyui-mga-ncurses libyui-mga-qt'
 #REPOS="libyui  libyui-ncurses  libyui-ncurses-pkg libyui-qt libyui-qt-pkg
 #REPOS=libyui-qt
 
-PARSED=$(getopt -o 'ci' --long 'clean,install' -- "$@")
+PARSED=$(getopt -o 'bci' --long 'buildrequires,clean,install' -- "$@")
 eval set -- "$PARSED"
 unset PARSED
 
@@ -51,6 +76,10 @@ SUDO=""
 
 while true; do
     case "$1" in
+        '-b'|'--buildrequires')
+            buildrequires
+            shift
+            ;;
         '-c'|'--clean')
             CLEAN=true
             shift
@@ -78,8 +107,11 @@ while true; do
     esac
 done
 
+if test $# == 0; then
+    set -- $LIBYUI_REPOS
+fi
 
-for i in $LIBYUI_REPOS; do
+for i in "$@" ; do
     echo == $i ==
     pushd $i #> /dev/null
     makerepo
