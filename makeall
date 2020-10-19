@@ -56,23 +56,13 @@ libyui-ncurses-pkg      libyui-qt-pkg
 libyui-ncurses-rest-api libyui-qt-rest-api
 '
 
-
-# libyui-bindings ruby-ui
-# LIBYUI_REPOS="$LIBYUI_REPOS libyui-gtk libyui-gtk-pkg"
-
-MGA_REPOS='libyui-mga
-libyui-mga-gtk libyui-mga-ncurses libyui-mga-qt'
-
-#REPOS="libyui  libyui-ncurses  libyui-ncurses-pkg libyui-qt libyui-qt-pkg
-#REPOS=libyui-qt
-
-PARSED=$(getopt -o 'bci' --long 'buildrequires,clean,install' -- "$@")
-eval set -- "$PARSED"
-unset PARSED
-
 CLEAN=false
 INSTALL=false
 SUDO=""
+
+PARSED=$(getopt -o 'bcis' --long 'buildrequires,clean,install,sudo' -- "$@")
+eval set -- "$PARSED"
+unset PARSED
 
 while true; do
     case "$1" in
